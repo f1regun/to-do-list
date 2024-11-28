@@ -24,6 +24,15 @@ body {
   flex-direction: column;
 }
 
+.categoryTitle {
+  align-self: center;
+  background-color: white;
+  font-size: 38px;
+  margin: 10px 0 10px 0;
+  border: 5px solid #ffffff;
+  border-radius: 10px;
+}
+
 .task {
   font-size: 18px;
   background-color: white;

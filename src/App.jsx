@@ -5,7 +5,9 @@ import TaskBox from './TaskBox.jsx'
 
 
 export default function App() {
+  const [tasks, setTasks] = useState([]);
   const [filterByCategory, setFilterByCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState();
   const [categories, setCategories] = useState([
     'education',
     'work',
@@ -14,8 +16,23 @@ export default function App() {
 
   return (
     <div className="wrapper">
-      <TaskBox categories={categories} filterByCategory={filterByCategory} />
-      <Sidebar categories={categories} setCategories={setCategories} setFilterByCategory={setFilterByCategory}/>     
+      <TaskBox 
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories} 
+        filterByCategory={filterByCategory} 
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+      <Sidebar 
+        tasks={tasks}
+        setTasks={setTasks}
+        categories={categories} 
+        setCategories={setCategories} 
+        setFilterByCategory={setFilterByCategory}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />     
     </div>      
   );
 }

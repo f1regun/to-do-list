@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Sidebar({ categories, setCategories, setFilterByCategory }) {
+export default function Sidebar({ tasks, setTasks, categories, setCategories, setFilterByCategory, setSelectedCategory }) {
     const [newCategory, setNewCategory] = useState('');
   
     function handleSubmit(e) {
@@ -9,8 +9,13 @@ export default function Sidebar({ categories, setCategories, setFilterByCategory
       setNewCategory("");
     }
   
-    function deleteCategory(index) {
-      setCategories(categories.filter((_, categoryIndex) => categoryIndex !== index));
+    function deleteCategory(category, index) {
+      if (confirm('You have unfulfilled tasks in this category which will be deleted, are you sure?')) {
+        setTasks(tasks.filter((task) => task.category !== category));
+        setCategories(categories.filter((_, categoryIndex) => categoryIndex !== index));
+        setFilterByCategory('All');
+        setSelectedCategory('');
+      }
     };
   
     return (
@@ -30,7 +35,7 @@ export default function Sidebar({ categories, setCategories, setFilterByCategory
           <button className='categoryBtn' onClick={() => setFilterByCategory(category)}>
             {category}
           </button>
-          <img className='deleteCategoryBtn' src="src/assets/trashcan.png" alt="Delete" width="20" height="20" onClick={() => deleteCategory(index)}></img>
+          <img className='deleteCategoryBtn' src="src/assets/trashcan.png" alt="Delete" width="20" height="20" onClick={() => deleteCategory(category, index)}></img>
           </div>
         ))}
       </div>
